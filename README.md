@@ -1,4 +1,4 @@
-# Tweet Based Brand Analysis — Coca-Cola vs Pepsi
+# Tweet Based Regional Brand Analysis — Starbucks vs Dunkin Donuts
 Columbia University EECS6893 Big Data Final Project -- Xi Yang (xy2378), Fan Wu(fw2322), Geqi Yan(gy2366)
 
 
