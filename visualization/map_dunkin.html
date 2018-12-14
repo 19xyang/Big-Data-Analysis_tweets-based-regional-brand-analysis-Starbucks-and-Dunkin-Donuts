@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+	.state{
+		fill: none;
+		stroke: #a9a9a9;
+		stroke-width: 1;
+	}
+	.state:hover{
+		fill-opacity:0.5;
+	}
+	#tooltip {   
+		position: absolute;           
+		text-align: center;
+		padding: 20px;             
+		margin: 10px;
+		font: 12px sans-serif;        
+		background: lightsteelblue;   
+		border: 1px;      
+		border-radius: 2px;           
+		pointer-events: none;         
+	}
+	#tooltip h4{
+		margin:0;
+		font-size:14px;
+	}
+	#tooltip{
+		background:rgba(0,0,0,0.9);
+		border:1px solid grey;
+		border-radius:5px;
+		font-size:12px;
+		width:auto;
+		padding:4px;
+		color:white;
+		opacity:0;
+	}
+	#tooltip table{
+		table-layout:fixed;
+	}
+	#tooltip tr td{
+		padding:0;
+		margin:0;
+	}
+	#tooltip tr td:nth-child(1){
+		width:50px;
+	}
+	#tooltip tr td:nth-child(2){
+		text-align:center;
+	}
+	/* Legend Font Style */
+	body {
+		font: 11px sans-serif;
+	}
+        
+	/* Legend Position Style */
+	.legend {
+		position:absolute;
+		left:900px;
+		top:400px;
+	}
+</style>
+<body>
+<div id="tooltip"></div><!-- div to hold tooltip. -->
+<svg width="960" height="600" id="statesvg"></svg> <!-- svg to hold the map. -->
+<script src="uStates.js"></script> <!-- creates uStates. -->
+<script src="http://d3js.org/d3.v3.min.js"></script>
+<script src="http://d3js.org/queue.v1.min.js"></script>
+<script>
+	function tooltipHtml(n, d){	/* function to create html content string in tooltip div. */
+		return "<h4>"+n+"</h4><table>"+
+			"<tr><td>Negative</td><td>"+(d.negative)+"</td></tr>"+
+			"<tr><td>Positive</td><td>"+(d.positive)+"</td></tr>"+
+			"<tr><td>Ratio</td><td>"+(d.ratio)+"</td></tr>"+
+			"</table>";
+	}
+	var color = d3.scale.linear()
+			  .range(["#6d63d6", "#EAE2F4"]);
+
+	var legendText = ["Low", "High"];
+	// Define linear scale for output
+	//var color = d3.scale.linear()
+				//.domain([0,10])
+				//.range(["#FFFFCC", "#800026"]);
+	
+
+
+	//var legendText = ["Starbucks", "Dunkin Donuts",'2','2','2','2','Starbucks', "Dunkin Donuts",'2','2','2','2'];
+	
+
+	queue()
+            .defer(d3.csv, "dunkin.csv")
+            .await(ready);
+
+    function ready(error, dunkin){
+	    var sampleData ={};	/* Sample random data. */	
+	    ["Alabama","Arkansas","Arizona","California","Colorado","Connecticut","Delaware","Florida","Georgia","Iowa","Idaho","Illinois","Indiana","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Missouri","Mississippi","Montana","North Carolina","North Dakota","Nebraska","New Hampshire","New Jersey","New Mexico","Nevada","New York","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Virginia","Vermont","Washington","Wisconsin","West Virginia","Wyoming"]
+		    .forEach(function(d){ 
+		    	for (var j = 0; j < 48; j++){
+		    		if (dunkin[j].states == d){
+                    sampleData[dunkin[j].states]={negative:dunkin[j].negative, positive:dunkin[j].positive, ratio:dunkin[j].ratio, color:d3.interpolate("#EAE2F4","#6d63d6")(dunkin[j].ratio)
+                        }
+                    }
+                };
+			  
+		    });
+		var legend = d3.select("body").append("svg")
+      			.attr("class", "legend")
+     			.attr("width", 140)
+    			.attr("height", 200)
+   				.selectAll("g")
+   				.data(color.domain().slice().reverse())
+   				.enter()
+   				.append("g")
+     			.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+  			legend.append("rect")
+   		  		.attr("width", 18)
+   		  		.attr("height", 18)
+   		  		.style("fill", color);
+
+  			legend.append("text")
+  		  		.data(legendText)
+      	  		.attr("x", 24)
+      	  		.attr("y", 9)
+      	  		.attr("dy", ".35em")
+      	  		.text(function(d) { return d; });
+	    
+	    /* draw states on id #statesvg */	
+	    uStates.draw("#statesvg", sampleData, tooltipHtml);
+	
+	    d3.select(self.frameElement).style("height", "600px"); 
+	}
+</script>
+
+</body>
+</html>
