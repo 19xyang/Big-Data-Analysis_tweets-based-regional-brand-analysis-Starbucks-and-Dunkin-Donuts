@@ -22,6 +22,6 @@ Tweet Based Brand Analysis — Starbucks vs Dunkin Donuts
 |   +--uStates.js
 |   +--word cloud.ipynb
 ```
-* 1.Directory data collection contains source code for crawling tweets from internet, we have two filters: the location and the key words which refer to the brand names. We collect tweet data for 48 states in USA except Hawaii and Alaska.
-* 2.Directory sentiment_analysis contains a ipython notebook. This part is implemented in databricks, connected with AWS. Using pyspark to train an sentiment classifier and do sentiment prediction for tweets we scrawled.
-* 3.Directory visualization contains one java script file and three html files as well as one .ipynb file. We draw three popularity map to demonstrate the popularity of each brand in different states in United States. We also draw a final map which shows the more welcomed brand in each state. We also draw word clouds of these two brands.
+* 1.Directory data collection contains source code for crawling tweets from internet, we have two filters: the location and the key words which refer to the brand names. We collect tweet data for 48 states in USA except Hawaii and Alaska. The file tweet+cleaning.ipynb is used to standardize the tweets.
+* 2.Directory sentiment_analysis contains two ipynb notebooks for sentiment analysis. In this part, we first use PySpark to train a sentiment classifier and then do sentiment prediction for tweets we collected.
+* 3.Directory visualization contains one java script file and three html files as well as two ipynb files. We draw three popularity maps to demonstrate the popularity of each brand in different states in United States and a final map which shows the more welcomed brand in each state. Also, we draw a pie chart to compare the overall sentiment analysis ratio of these two brands. Finally, we draw word clouds of these two brands.
