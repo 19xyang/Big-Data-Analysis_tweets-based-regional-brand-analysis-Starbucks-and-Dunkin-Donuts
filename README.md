@@ -7,7 +7,7 @@ Xi Yang is the owener of this repository. Fan Wu and Geqi Yan mainly worked on t
 Tweet Based Brand Analysis — Starbucks vs Dunkin Donuts
 |
 +--sentiment analysis
-|   +--tweet+cleaning.ipnb
+|   +--tweet+cleaning.ipynb
 |   +--sentiment+analysis+starbucks.ipynb
 |   +--sentiment+analysis+dunkin.py
 +--data collection
