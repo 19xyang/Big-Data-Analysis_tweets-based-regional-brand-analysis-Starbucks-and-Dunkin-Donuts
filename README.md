@@ -2,6 +2,8 @@
 Columbia University EECS6893 Big Data Final Project -- Xi Yang (xy2378), Fan Wu(fw2322), Geqi Yan(gy2366)
 Xi Yang is the owener of this repository. Fan Wu and Geqi Yan mainly worked on the sentiment prediction part. Xi Yang mainly contributed to the data visualization part. All other works such as tweet collecting, further analysis, and report writing are done in group.
 
+For detail, please see the final report.
+
 ## Directory
 ```
 Tweet Based Brand Analysis — Starbucks vs Dunkin Donuts
